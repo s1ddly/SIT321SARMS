@@ -1,0 +1,21 @@
+﻿@model SIT321_SARMS.Models.TimetableViewModel
+<div style="margin-top: 40px; margin-left: 0px;" class="row">
+    <h3>Timetable</h3>
+    <div class="row">
+        <div class="col-md-3">
+            <strong>Lecturer</strong>
+            <select class="form-control">
+                <option>Example Lecturer</option>
+            </select>
+        </div>
+        <div class="col-md-3">
+            <span><strong>Unit</strong>
+            <select class="form-control">
+                <option>SIT321 - Software Engineering Methods</option>
+            </select></span>
+</div>
+        <div class="col-md-3">
+            @Html.ActionLink("View class", "Index", "Attendance")
+        </div>
+    </div>
+</div>

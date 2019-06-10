@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="4dee838be6874f0d862f4c8f93e973aa" Name="Diagram1" >
+        <EntityTypeShape EntityType="SARMSDBModel.Admin" Width="1.5" PointX="5.75" PointY="5.75" />
+        <EntityTypeShape EntityType="SARMSDBModel.Attendance" Width="1.5" PointX="5.25" PointY="1.75" />
+        <EntityTypeShape EntityType="SARMSDBModel.AttendanceType" Width="1.5" PointX="3" PointY="11.875" />
+        <EntityTypeShape EntityType="SARMSDBModel.LectureClass" Width="1.5" PointX="3" PointY="1" />
+        <EntityTypeShape EntityType="SARMSDBModel.Lecturer" Width="1.5" PointX="7.75" PointY="3.75" />
+        <EntityTypeShape EntityType="SARMSDBModel.Student" Width="1.5" PointX="3" PointY="7.5" />
+        <EntityTypeShape EntityType="SARMSDBModel.Unit" Width="1.5" PointX="0.75" PointY="2.375" />
+        <EntityTypeShape EntityType="SARMSDBModel.SESH" Width="1.5" PointX="9.75" PointY="0.75" />
+        <AssociationConnector Association="SARMSDBModel.FK_Attendance_AttendanceType" />
+        <AssociationConnector Association="SARMSDBModel.FK_Attendance_Class" />
+        <AssociationConnector Association="SARMSDBModel.FK_Attendance_Student" />
+        <AssociationConnector Association="SARMSDBModel.FK_Class_Unit" />
+        <EntityTypeShape EntityType="SARMSDBModel.Lecture" Width="1.5" PointX="6.125" PointY="9" />
+        <EntityTypeShape EntityType="SARMSDBModel.Alert" Width="1.5" PointX="10" PointY="5.375" />
+        <EntityTypeShape EntityType="SARMSDBModel.Message" Width="1.5" PointX="12.25" PointY="5.625" />
+        <EntityTypeShape EntityType="SARMSDBModel.User" Width="1.5" PointX="8.375" PointY="9.75" />
+        <AssociationConnector Association="SARMSDBModel.FK_Alert_Lecturer" />
+        <AssociationConnector Association="SARMSDBModel.FK_Alert_Student" />
+        <AssociationConnector Association="SARMSDBModel.FK_Alert_Unit" />
+        <AssociationConnector Association="SARMSDBModel.FK_Message_Alert" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,129 @@
+﻿@model SIT321_SARMS.Models.ClassAttendaceViewModel
+
+@{
+    ViewBag.Title = "Attendance Class view";
+}
+<h3>Attendance - @Model.Lectureclass.Unit.UnitName</h3>
+<strong>Lecture Date: </strong> @Model.date.ToString("dd/MM/yyyy") <strong> Number of students: </strong> @Model.classStudent.Count()
+<h3>@ViewBag.Message</h3>
+<hr>
+
+<ul class="list-group">
+    @foreach (SIT321_SARMS_Data.Student classStudent in Model.classStudent)
+    {
+        <li class="list-group-item attendanceListItem">
+            <strong>@classStudent.Fname @classStudent.Lname</strong>
+            <span class="studentAttendanceIcons">
+                @{int attendance;
+                    if (classStudent.Attendances.Any())
+                    {
+                        if (classStudent.Attendances.Where(e => e.Date == Model.date && e.ClassID == Model.Lectureclass.ClassID).LastOrDefault() != null)
+                        {
+                            attendance = classStudent.Attendances.Where(e => e.Date == Model.date && e.ClassID == Model.Lectureclass.ClassID).LastOrDefault().Type;
+                        }
+                        else {
+                            attendance = 0;
+                        }
+
+                    }
+                    else {
+                        attendance = 0;
+                    }
+                 }
+                @foreach (SIT321_SARMS_Data.AttendanceType type in Model.attendanceTypes)
+                {
+                    string value = type.AttendanceTypeID.ToString() + classStudent.UID.ToString();
+                    if (type.AttendanceTypeID == attendance)
+                    {
+                        <input style="display: none;" id="@value" type="radio" checked="checked" name="@classStudent.ID" onclick="AddAttendance(@type.AttendanceTypeID, @classStudent.ID, @Model.Lectureclass.ClassID, @Model.date.Date.ToShortDateString())">
+                    }
+                    else
+                    {
+                        <input style="display: none;" id="@value" type="radio" name="@classStudent.ID" onclick="AddAttendance(@type.AttendanceTypeID, @classStudent.ID, @Model.Lectureclass.ClassID, @Model.date.Date.ToShortDateString())">
+                    }
+                    <label class="attendanceIcon" for="@value">@type.AttendanceTypeName</label>
+                }
+            </span>
+            <span style="float: right;"><a href="#" onclick="ClearAttendance(@classStudent.ID, @Model.Lectureclass.ClassID)">Clear attendance</a></span>
+        </li>
+    }
+</ul>
+
+<script>
+    function AddAttendance(type, student, lectureClass, date) {
+
+        dataforServer = {
+            studentID: student,
+            lectureClass: lectureClass,
+            type: type,
+            date: "@Model.date.ToShortDateString()",
+        }
+
+        $.ajax({
+            url: "/Attendance/AddAttendance",
+            type: "POST",
+            data: dataforServer,
+            success: function (result) {
+                
+            toastr.success('Attendance updated');
+            toastr.options = {
+                "closeButton": false,
+                "debug": false,
+                "newestOnTop": false,
+                "progressBar": false,
+                "positionClass": "toast-top-right",
+                "preventDuplicates": false,
+                "onclick": null,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "2000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+           }
+            }
+        });
+    }
+
+    function ClearAttendance(student, lectureClass) {
+
+        dataforServer = {
+            studentID: student,
+            lectureClass: lectureClass,
+            date: "@Model.date.ToShortDateString()",
+        }
+
+        $.ajax({
+            url: "/Attendance/RemoveStudentAttendance",
+            type: "POST",
+            data: dataforServer,
+            success: function (result) {
+
+            var ele = document.getElementsByName(student);
+            for (var i = 0; i < ele.length; i++)
+            ele[i].checked = false;
+
+            toastr.info('Attendance cleared for student');
+            toastr.options = {
+                "closeButton": false,
+                "debug": false,
+                "newestOnTop": false,
+                "progressBar": false,
+                "positionClass": "toast-top-right",
+                "preventDuplicates": false,
+                "onclick": null,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "2000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+           }
+           }
+        });
+    }
+</script>

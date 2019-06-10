@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<head>
+</head>
+<body>
+    <div class="jumbotron">
+        <fieldset>
+            <legend>Login</legend>
+            @using (Ajax.BeginForm("loginer", "Home",
+                                    new AjaxOptions { UpdateTargetId = "loginfrm" }))
+            {
+                <div id="loginfrm">
+                    <p>
+                        Username:@Html.TextBox("uname")
+                    </p>
+                    <p>
+                        Password:@Html.Password("pword")
+                    </p>
+                    <button class="btn btn-default">Login</button>
+                </div>
+            }
+        </fieldset>
+    </div>
+    <h2></h2>
+    <p></p>
+</body>

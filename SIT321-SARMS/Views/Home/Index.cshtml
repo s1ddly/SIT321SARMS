@@ -1,0 +1,33 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<script type="text/javascript">
+    function givestudent() { document.cookie = 'u=S; path=/;'; alert(document.cookie); }
+    function takestudent() { document.cookie = 'u=; cookid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'; alert(document.cookie); }
+</script>
+
+<h3>Home</h3>
+<p>Welcome to the Student at Risk Monitoring System.</p>
+<a class="btn btn-default" onclick="givestudent()">Give Student &raquo;</a>
+<a class="btn btn-default" onclick="takestudent()">Take Student &raquo;</a>
+<a class="btn btn-default" onclick="javascript: alert(document.cookie);">View Cookie &raquo;</a>
+@{Html.RenderAction("Timetable");}
+<div class="row" style="margin-top: 20px;">
+    <div class="col-md-4">
+        <h2>Schedule</h2>
+        <p>
+            Manage lectures using this page
+        </p>
+        <p><a class="btn btn-default" href="/Schedule">Schedules &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Alerts</h2>
+        <p>View and manage system alerts</p>
+        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">View Alerts &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Web Hosting</h2>
+        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
+        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+    </div>
+</div>

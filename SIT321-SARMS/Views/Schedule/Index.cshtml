@@ -1,0 +1,164 @@
+﻿@model SIT321_SARMS.Models.ClassScheduleViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Schedule for unit @Model.unitCode</h2>
+
+<table style="width: 100%">
+    <tr>
+        <th>Lecture ID</th>
+        <th>Unit Code</th>
+        <th>Day</th>
+        <th>Start Time</th>
+        <th>Length (hrs)</th>
+        <th>Classroom</th>
+        <th>Remove</th>
+    </tr>
+    @foreach (SIT321_SARMS_Data.Lecture unitLecture in Model.classLecture)
+    {
+    <tr>
+        <td>@unitLecture.LectureId</td>
+        <td>@unitLecture.UnitCode</td>
+        @{
+            switch (unitLecture.Day)
+            {
+                case 1:
+                    <td>Sunday</td>
+                    break;
+                case 2:
+                    <td>Monday</td>
+                    break;
+                case 3:
+                    <td>Tuesday</td>
+                    break;
+                case 4:
+                    <td>Wednesday</td>
+                    break;
+                case 5:
+                    <td>Thursday</td>
+                    break;
+                case 6:
+                    <td>Friday</td>
+                    break;
+                case 7:
+                    <td>Saturday</td>
+                    break;
+                default:
+                    <td> </td>
+                    break;
+            }
+         }
+        <td>@unitLecture.StartTime</td>
+        <td>@unitLecture.Length</td>
+        <td>@unitLecture.Classroom</td>
+        <td>@Html.ActionLink("Remove", "RemoveLecture", "Schedule", new { LectureId = @unitLecture.LectureId }, null)</td>
+    </tr>
+    }
+</table>
+<hr />
+<h3>Add Lecture to Schedule for @Model.unitCode</h3>
+<form>
+    <table style="width: 40%">
+        <tr>
+            <td>Day of Week:</td>
+            <td>
+                <select name="day" id="day">
+                    <option value="2">Monday</option>
+                    <option value="3">Tuesday</option>
+                    <option value="4">Wednesday</option>
+                    <option value="5">Thursday</option>
+                    <option value="6">Friday</option>
+                    <option value="7">Saturday</option>
+                    <option value="1">Sunday</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Start Time:</td>
+            <td>
+                <select name="start" id="start">
+                    <option value="9">9:00</option>
+                    <option value="10">10:00</option>
+                    <option value="11">11:00</option>
+                    <option value="12">12:00</option>
+                    <option value="13">13:00</option>
+                    <option value="14">14:00</option>
+                    <option value="15">15:00</option>
+                    <option value="16">16:00</option>
+                    <option value="17">17:00</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Length (hrs):</td>
+            <td>
+                <select name="length" id="length">
+                    <option value="1">1</option>
+                    <option value="1.25">1.25</option>
+                    <option value="1.5">1.5</option>
+                    <option value="1.75">1.75</option>
+                    <option value="2">2</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Classroom:</td>
+            <td>
+                <select name="classroom" id="classroom">
+                    <option value="k-201">k-201</option>
+                    <option value="k-203">k-203</option>
+                    <option value="k-205">k-205</option>
+                    <option value="k-208">k-208</option>
+                    <option value="d-103">d-103</option>
+                    <option value="d-104">d-104</option>
+                    <option value="d-105">d-105</option>
+                    <option value="d-123">d-123</option>
+                </select>
+            </td>
+        </tr>
+    </table>
+    <br />
+    <input type="button" value="Add" onclick="AddLecture()">
+</form>
+<script>
+
+    function AddLecture() {
+
+        dataforServer = {
+            unit: "@Model.unitCode",
+            day: document.getElementById("day").value,
+            start: document.getElementById("start").value,
+            length: document.getElementById("length").value,
+            classroom: document.getElementById("classroom").value
+        }
+
+        $.ajax({
+            url: "/Schedule/AddLecture",
+            type: "POST",
+            data: dataforServer,
+            success: function (result) { }
+        })
+
+        toastr.success('Lecture added');
+        toastr.options = {
+            "closeButton": false,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": false,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "2000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        }
+    }
+
+</script> 

@@ -1,0 +1,803 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SARMSDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UID" Type="nchar" MaxLength="12" Nullable="false" />
+          <Property Name="Pword" Type="nchar" MaxLength="40" Nullable="false" />
+          <Property Name="Role" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Fname" Type="nchar" MaxLength="30" Nullable="false" />
+          <Property Name="Lname" Type="nchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Alert">
+          <Key>
+            <PropertyRef Name="AlertID" />
+          </Key>
+          <Property Name="AlertID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UnitID" Type="int" Nullable="false" />
+          <Property Name="Type" Type="nchar" MaxLength="3" Nullable="false" />
+          <Property Name="LecturerID" Type="int" Nullable="false" />
+          <Property Name="StudentID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Attendance">
+          <Key>
+            <PropertyRef Name="AttendanceID" />
+          </Key>
+          <Property Name="AttendanceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EntryDate" Type="smalldatetime" />
+          <Property Name="Date" Type="smalldatetime" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="ClassID" Type="int" Nullable="false" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="StudentID" Type="int" Nullable="false" />
+          <Property Name="StaffID" Type="int" />
+        </EntityType>
+        <EntityType Name="AttendanceType">
+          <Key>
+            <PropertyRef Name="AttendanceTypeID" />
+          </Key>
+          <Property Name="AttendanceTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AttendanceTypeName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="AttendanceTypeApproved" Type="bit" Nullable="false" />
+          <Property Name="AttendanceTypeActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Class">
+          <Key>
+            <PropertyRef Name="ClassID" />
+          </Key>
+          <Property Name="ClassID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="W1" Type="nchar" MaxLength="10" />
+          <Property Name="W2" Type="nchar" MaxLength="10" />
+          <Property Name="W3" Type="nchar" MaxLength="10" />
+          <Property Name="W4" Type="nchar" MaxLength="10" />
+          <Property Name="W5" Type="nchar" MaxLength="10" />
+          <Property Name="W6" Type="nchar" MaxLength="10" />
+          <Property Name="W7" Type="nchar" MaxLength="10" />
+          <Property Name="L1" Type="int" />
+          <Property Name="L2" Type="int" />
+          <Property Name="L3" Type="int" />
+          <Property Name="L4" Type="int" />
+          <Property Name="L5" Type="int" />
+          <Property Name="L6" Type="int" />
+          <Property Name="L7" Type="int" />
+          <Property Name="UnitID" Type="int" />
+        </EntityType>
+        <EntityType Name="Lecture">
+          <Key>
+            <PropertyRef Name="LectureId" />
+          </Key>
+          <Property Name="LectureId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Day" Type="int" />
+          <Property Name="StartTime" Type="datetime" Nullable="false" />
+          <Property Name="Length" Type="float" />
+          <Property Name="Classroom" Type="varchar" MaxLength="50" />
+          <Property Name="UnitCode" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Lecturer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UID" Type="nchar" MaxLength="12" Nullable="false" />
+          <Property Name="Pword" Type="nchar" MaxLength="40" Nullable="false" />
+          <Property Name="Role" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Fname" Type="nchar" MaxLength="30" Nullable="false" />
+          <Property Name="Lname" Type="nchar" MaxLength="30" Nullable="false" />
+          <Property Name="Lec1" Type="nchar" MaxLength="15" />
+          <Property Name="Lec2" Type="nchar" MaxLength="15" />
+          <Property Name="Lec3" Type="nchar" MaxLength="15" />
+          <Property Name="Lec4" Type="nchar" MaxLength="15" />
+          <Property Name="Lec5" Type="nchar" MaxLength="15" />
+          <Property Name="Lec6" Type="nchar" MaxLength="15" />
+          <Property Name="Lec7" Type="nchar" MaxLength="10" />
+          <Property Name="Lec8" Type="nchar" MaxLength="10" />
+          <Property Name="Lec9" Type="nchar" MaxLength="10" />
+          <Property Name="Lec10" Type="nchar" MaxLength="10" />
+          <Property Name="Lec11" Type="nchar" MaxLength="10" />
+          <Property Name="Lec12" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Message">
+          <Key>
+            <PropertyRef Name="MessageID" />
+          </Key>
+          <Property Name="MessageID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AlertID" Type="int" Nullable="false" />
+          <Property Name="DateTime" Type="datetime" Nullable="false" />
+          <Property Name="StudentSender" Type="bit" Nullable="false" />
+          <Property Name="LecturerSender" Type="bit" Nullable="false" />
+          <Property Name="MessageBody" Type="nchar" MaxLength="512" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SARMSDB.dbo.SESH' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="SESH">
+          <Key>
+            <PropertyRef Name="UID" />
+            <PropertyRef Name="TimeSt" />
+          </Key>
+          <Property Name="UID" Type="nchar" MaxLength="12" Nullable="false" />
+          <Property Name="TimeSt" Type="time" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UID" Type="nchar" MaxLength="12" Nullable="false" />
+          <Property Name="Pword" Type="nchar" MaxLength="40" Nullable="false" />
+          <Property Name="Role" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Fname" Type="nchar" MaxLength="30" Nullable="false" />
+          <Property Name="Lname" Type="nchar" MaxLength="30" Nullable="false" />
+          <Property Name="Lec1" Type="nchar" MaxLength="15" />
+          <Property Name="Lec2" Type="nchar" MaxLength="15" />
+          <Property Name="Lec3" Type="nchar" MaxLength="15" />
+          <Property Name="Lec4" Type="nchar" MaxLength="15" />
+          <Property Name="Lec5" Type="nchar" MaxLength="15" />
+          <Property Name="Lec6" Type="nchar" MaxLength="15" />
+        </EntityType>
+        <EntityType Name="Unit">
+          <Key>
+            <PropertyRef Name="UnitID" />
+          </Key>
+          <Property Name="UnitID" Type="int" Nullable="false" />
+          <Property Name="UnitCode" Type="nchar" MaxLength="6" />
+          <Property Name="UnitName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Alert_Lecturer">
+          <End Role="Lecturer" Type="Self.Lecturer" Multiplicity="1" />
+          <End Role="Alert" Type="Self.Alert" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lecturer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Alert">
+              <PropertyRef Name="LecturerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Alert_Student">
+          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="Alert" Type="Self.Alert" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Alert">
+              <PropertyRef Name="StudentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Alert_Unit">
+          <End Role="Unit" Type="Self.Unit" Multiplicity="1" />
+          <End Role="Alert" Type="Self.Alert" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Unit">
+              <PropertyRef Name="UnitID" />
+            </Principal>
+            <Dependent Role="Alert">
+              <PropertyRef Name="UnitID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Attendance_AttendanceType">
+          <End Role="AttendanceType" Type="Self.AttendanceType" Multiplicity="1" />
+          <End Role="Attendance" Type="Self.Attendance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AttendanceType">
+              <PropertyRef Name="AttendanceTypeID" />
+            </Principal>
+            <Dependent Role="Attendance">
+              <PropertyRef Name="Type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Attendance_Class">
+          <End Role="Class" Type="Self.Class" Multiplicity="1" />
+          <End Role="Attendance" Type="Self.Attendance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Class">
+              <PropertyRef Name="ClassID" />
+            </Principal>
+            <Dependent Role="Attendance">
+              <PropertyRef Name="ClassID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Attendance_Student">
+          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="Attendance" Type="Self.Attendance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Attendance">
+              <PropertyRef Name="StudentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Class_Unit">
+          <End Role="Unit" Type="Self.Unit" Multiplicity="0..1" />
+          <End Role="Class" Type="Self.Class" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Unit">
+              <PropertyRef Name="UnitID" />
+            </Principal>
+            <Dependent Role="Class">
+              <PropertyRef Name="UnitID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Message_Alert">
+          <End Role="Alert" Type="Self.Alert" Multiplicity="1" />
+          <End Role="Message" Type="Self.Message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Alert">
+              <PropertyRef Name="AlertID" />
+            </Principal>
+            <Dependent Role="Message">
+              <PropertyRef Name="AlertID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SARMSDBModelStoreContainer">
+          <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Alert" EntityType="Self.Alert" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Attendance" EntityType="Self.Attendance" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AttendanceType" EntityType="Self.AttendanceType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Class" EntityType="Self.Class" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Lecture" EntityType="Self.Lecture" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Lecturer" EntityType="Self.Lecturer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Message" EntityType="Self.Message" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Unit" EntityType="Self.Unit" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SESH" EntityType="Self.SESH" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [SESH].[UID] AS [UID], 
+    [SESH].[TimeSt] AS [TimeSt]
+    FROM [dbo].[SESH] AS [SESH]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Alert_Lecturer" Association="Self.FK_Alert_Lecturer">
+            <End Role="Lecturer" EntitySet="Lecturer" />
+            <End Role="Alert" EntitySet="Alert" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Alert_Student" Association="Self.FK_Alert_Student">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="Alert" EntitySet="Alert" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Alert_Unit" Association="Self.FK_Alert_Unit">
+            <End Role="Unit" EntitySet="Unit" />
+            <End Role="Alert" EntitySet="Alert" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Attendance_AttendanceType" Association="Self.FK_Attendance_AttendanceType">
+            <End Role="AttendanceType" EntitySet="AttendanceType" />
+            <End Role="Attendance" EntitySet="Attendance" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Attendance_Class" Association="Self.FK_Attendance_Class">
+            <End Role="Class" EntitySet="Class" />
+            <End Role="Attendance" EntitySet="Attendance" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Attendance_Student" Association="Self.FK_Attendance_Student">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="Attendance" EntitySet="Attendance" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Class_Unit" Association="Self.FK_Class_Unit">
+            <End Role="Unit" EntitySet="Unit" />
+            <End Role="Class" EntitySet="Class" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Message_Alert" Association="Self.FK_Message_Alert">
+            <End Role="Alert" EntitySet="Alert" />
+            <End Role="Message" EntitySet="Message" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SARMSDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="SARMSDBEntities" annotation:LazyLoadingEnabled="true" >
+          <EntitySet Name="Admins" EntityType="SARMSDBModel.Admin" />
+          <EntitySet Name="Attendances" EntityType="SARMSDBModel.Attendance" />
+          <EntitySet Name="AttendanceTypes" EntityType="SARMSDBModel.AttendanceType" />
+          <EntitySet Name="LectureClasses" EntityType="SARMSDBModel.LectureClass" />
+          <EntitySet Name="Lecturers" EntityType="SARMSDBModel.Lecturer" />
+          <EntitySet Name="Students" EntityType="SARMSDBModel.Student" />
+          <EntitySet Name="Units" EntityType="SARMSDBModel.Unit" />
+          <EntitySet Name="SESHes" EntityType="SARMSDBModel.SESH" />
+          <AssociationSet Name="FK_Attendance_AttendanceType" Association="SARMSDBModel.FK_Attendance_AttendanceType">
+            <End Role="AttendanceType" EntitySet="AttendanceTypes" />
+            <End Role="Attendance" EntitySet="Attendances" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Attendance_Class" Association="SARMSDBModel.FK_Attendance_Class">
+            <End Role="Class" EntitySet="LectureClasses" />
+            <End Role="Attendance" EntitySet="Attendances" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Attendance_Student" Association="SARMSDBModel.FK_Attendance_Student">
+            <End Role="Student" EntitySet="Students" />
+            <End Role="Attendance" EntitySet="Attendances" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Class_Unit" Association="SARMSDBModel.FK_Class_Unit">
+            <End Role="Unit" EntitySet="Units" />
+            <End Role="Class" EntitySet="LectureClasses" />
+          </AssociationSet>
+          <EntitySet Name="Lectures" EntityType="SARMSDBModel.Lecture" />
+          <EntitySet Name="Alerts" EntityType="SARMSDBModel.Alert" />
+          <EntitySet Name="Messages" EntityType="SARMSDBModel.Message" />
+          <EntitySet Name="Users" EntityType="SARMSDBModel.User" />
+          <AssociationSet Name="FK_Alert_Lecturer" Association="SARMSDBModel.FK_Alert_Lecturer">
+            <End Role="Lecturer" EntitySet="Lecturers" />
+            <End Role="Alert" EntitySet="Alerts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Alert_Student" Association="SARMSDBModel.FK_Alert_Student">
+            <End Role="Student" EntitySet="Students" />
+            <End Role="Alert" EntitySet="Alerts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Alert_Unit" Association="SARMSDBModel.FK_Alert_Unit">
+            <End Role="Unit" EntitySet="Units" />
+            <End Role="Alert" EntitySet="Alerts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Message_Alert" Association="SARMSDBModel.FK_Message_Alert">
+            <End Role="Alert" EntitySet="Alerts" />
+            <End Role="Message" EntitySet="Messages" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UID" Type="String" Nullable="false" MaxLength="12" FixedLength="true" Unicode="true" />
+          <Property Name="Pword" Type="String" Nullable="false" MaxLength="40" FixedLength="true" Unicode="true" />
+          <Property Name="Role" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Fname" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="Lname" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Attendance">
+          <Key>
+            <PropertyRef Name="AttendanceID" />
+          </Key>
+          <Property Name="AttendanceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EntryDate" Type="DateTime" Precision="0" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="ClassID" Type="Int32" Nullable="false" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="StudentID" Type="Int32" Nullable="false" />
+          <Property Name="StaffID" Type="Int32" />
+          <NavigationProperty Name="AttendanceType" Relationship="SARMSDBModel.FK_Attendance_AttendanceType" FromRole="Attendance" ToRole="AttendanceType" />
+          <NavigationProperty Name="Class" Relationship="SARMSDBModel.FK_Attendance_Class" FromRole="Attendance" ToRole="Class" />
+          <NavigationProperty Name="Student" Relationship="SARMSDBModel.FK_Attendance_Student" FromRole="Attendance" ToRole="Student" />
+        </EntityType>
+        <EntityType Name="AttendanceType">
+          <Key>
+            <PropertyRef Name="AttendanceTypeID" />
+          </Key>
+          <Property Name="AttendanceTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AttendanceTypeName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AttendanceTypeApproved" Type="Boolean" Nullable="false" />
+          <Property Name="AttendanceTypeActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Attendances" Relationship="SARMSDBModel.FK_Attendance_AttendanceType" FromRole="AttendanceType" ToRole="Attendance" />
+        </EntityType>
+        <EntityType Name="LectureClass">
+          <Key>
+            <PropertyRef Name="ClassID" />
+          </Key>
+          <Property Name="ClassID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="W1" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="W2" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="W3" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="W4" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="W5" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="W6" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="W7" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="L1" Type="Int32" />
+          <Property Name="L2" Type="Int32" />
+          <Property Name="L3" Type="Int32" />
+          <Property Name="L4" Type="Int32" />
+          <Property Name="L5" Type="Int32" />
+          <Property Name="L6" Type="Int32" />
+          <Property Name="L7" Type="Int32" />
+          <Property Name="UnitID" Type="Int32" />
+          <NavigationProperty Name="Attendances" Relationship="SARMSDBModel.FK_Attendance_Class" FromRole="Class" ToRole="Attendance" />
+          <NavigationProperty Name="Unit" Relationship="SARMSDBModel.FK_Class_Unit" FromRole="Class" ToRole="Unit" />
+        </EntityType>
+        <EntityType Name="Lecturer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UID" Type="String" Nullable="false" MaxLength="12" FixedLength="true" Unicode="true" />
+          <Property Name="Pword" Type="String" Nullable="false" MaxLength="40" FixedLength="true" Unicode="true" />
+          <Property Name="Role" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Fname" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="Lname" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="Lec1" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+          <Property Name="Lec2" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+          <Property Name="Lec3" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+          <Property Name="Lec4" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+          <Property Name="Lec5" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+          <Property Name="Lec6" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+          <Property Name="Lec7" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Lec8" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Lec9" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Lec10" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Lec11" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Lec12" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Alerts" Relationship="SARMSDBModel.FK_Alert_Lecturer" FromRole="Lecturer" ToRole="Alert" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UID" Type="String" Nullable="false" MaxLength="12" FixedLength="true" Unicode="true" />
+          <Property Name="Pword" Type="String" Nullable="false" MaxLength="40" FixedLength="true" Unicode="true" />
+          <Property Name="Role" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Fname" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="Lname" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="Lec1" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+          <Property Name="Lec2" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+          <Property Name="Lec3" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+          <Property Name="Lec4" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+          <Property Name="Lec5" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+          <Property Name="Lec6" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Attendances" Relationship="SARMSDBModel.FK_Attendance_Student" FromRole="Student" ToRole="Attendance" />
+          <NavigationProperty Name="Alerts" Relationship="SARMSDBModel.FK_Alert_Student" FromRole="Student" ToRole="Alert" />
+        </EntityType>
+        <EntityType Name="Unit">
+          <Key>
+            <PropertyRef Name="UnitID" />
+          </Key>
+          <Property Name="UnitID" Type="Int32" Nullable="false" />
+          <Property Name="UnitCode" Type="String" MaxLength="6" FixedLength="true" Unicode="true" />
+          <Property Name="UnitName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Classes" Relationship="SARMSDBModel.FK_Class_Unit" FromRole="Unit" ToRole="Class" />
+          <NavigationProperty Name="Alerts" Relationship="SARMSDBModel.FK_Alert_Unit" FromRole="Unit" ToRole="Alert" />
+        </EntityType>
+        <EntityType Name="SESH">
+          <Key>
+            <PropertyRef Name="UID" />
+            <PropertyRef Name="TimeSt" />
+          </Key>
+          <Property Name="UID" Type="String" Nullable="false" MaxLength="12" FixedLength="true" Unicode="true" />
+          <Property Name="TimeSt" Type="Time" Nullable="false" Precision="7" />
+        </EntityType>
+        <Association Name="FK_Attendance_AttendanceType">
+          <End Type="SARMSDBModel.AttendanceType" Role="AttendanceType" Multiplicity="1" />
+          <End Type="SARMSDBModel.Attendance" Role="Attendance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AttendanceType">
+              <PropertyRef Name="AttendanceTypeID" />
+            </Principal>
+            <Dependent Role="Attendance">
+              <PropertyRef Name="Type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Attendance_Class">
+          <End Type="SARMSDBModel.LectureClass" Role="Class" Multiplicity="1" />
+          <End Type="SARMSDBModel.Attendance" Role="Attendance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Class">
+              <PropertyRef Name="ClassID" />
+            </Principal>
+            <Dependent Role="Attendance">
+              <PropertyRef Name="ClassID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Attendance_Student">
+          <End Type="SARMSDBModel.Student" Role="Student" Multiplicity="1" />
+          <End Type="SARMSDBModel.Attendance" Role="Attendance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Attendance">
+              <PropertyRef Name="StudentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Class_Unit">
+          <End Type="SARMSDBModel.Unit" Role="Unit" Multiplicity="0..1" />
+          <End Type="SARMSDBModel.LectureClass" Role="Class" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Unit">
+              <PropertyRef Name="UnitID" />
+            </Principal>
+            <Dependent Role="Class">
+              <PropertyRef Name="UnitID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Lecture">
+          <Key>
+            <PropertyRef Name="LectureId" />
+          </Key>
+          <Property Name="LectureId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Day" Type="Int32" />
+          <Property Name="StartTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Length" Type="Double" />
+          <Property Name="Classroom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UnitCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Alert">
+          <Key>
+            <PropertyRef Name="AlertID" />
+          </Key>
+          <Property Name="AlertID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UnitID" Type="Int32" Nullable="false" />
+          <Property Name="Type" Type="String" Nullable="false" MaxLength="3" FixedLength="true" Unicode="true" />
+          <Property Name="LecturerID" Type="Int32" Nullable="false" />
+          <Property Name="StudentID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Lecturer" Relationship="SARMSDBModel.FK_Alert_Lecturer" FromRole="Alert" ToRole="Lecturer" />
+          <NavigationProperty Name="Student" Relationship="SARMSDBModel.FK_Alert_Student" FromRole="Alert" ToRole="Student" />
+          <NavigationProperty Name="Unit" Relationship="SARMSDBModel.FK_Alert_Unit" FromRole="Alert" ToRole="Unit" />
+          <NavigationProperty Name="Messages" Relationship="SARMSDBModel.FK_Message_Alert" FromRole="Alert" ToRole="Message" />
+        </EntityType>
+        <EntityType Name="Message">
+          <Key>
+            <PropertyRef Name="MessageID" />
+          </Key>
+          <Property Name="MessageID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AlertID" Type="Int32" Nullable="false" />
+          <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="StudentSender" Type="Boolean" Nullable="false" />
+          <Property Name="LecturerSender" Type="Boolean" Nullable="false" />
+          <Property Name="MessageBody" Type="String" Nullable="false" MaxLength="512" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Alert" Relationship="SARMSDBModel.FK_Message_Alert" FromRole="Message" ToRole="Alert" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <Association Name="FK_Alert_Lecturer">
+          <End Type="SARMSDBModel.Lecturer" Role="Lecturer" Multiplicity="1" />
+          <End Type="SARMSDBModel.Alert" Role="Alert" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lecturer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Alert">
+              <PropertyRef Name="LecturerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Alert_Student">
+          <End Type="SARMSDBModel.Student" Role="Student" Multiplicity="1" />
+          <End Type="SARMSDBModel.Alert" Role="Alert" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Alert">
+              <PropertyRef Name="StudentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Alert_Unit">
+          <End Type="SARMSDBModel.Unit" Role="Unit" Multiplicity="1" />
+          <End Type="SARMSDBModel.Alert" Role="Alert" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Unit">
+              <PropertyRef Name="UnitID" />
+            </Principal>
+            <Dependent Role="Alert">
+              <PropertyRef Name="UnitID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Message_Alert">
+          <End Type="SARMSDBModel.Alert" Role="Alert" Multiplicity="1" />
+          <End Type="SARMSDBModel.Message" Role="Message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Alert">
+              <PropertyRef Name="AlertID" />
+            </Principal>
+            <Dependent Role="Message">
+              <PropertyRef Name="AlertID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SARMSDBModelStoreContainer" CdmEntityContainer="SARMSDBEntities" >
+          <EntitySetMapping Name="Admins">
+            <EntityTypeMapping TypeName="SARMSDBModel.Admin">
+              <MappingFragment StoreEntitySet="Admin">
+                <ScalarProperty Name="Lname" ColumnName="Lname" />
+                <ScalarProperty Name="Fname" ColumnName="Fname" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="Pword" ColumnName="Pword" />
+                <ScalarProperty Name="UID" ColumnName="UID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Attendances">
+            <EntityTypeMapping TypeName="SARMSDBModel.Attendance">
+              <MappingFragment StoreEntitySet="Attendance">
+                <ScalarProperty Name="StaffID" ColumnName="StaffID" />
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="ClassID" ColumnName="ClassID" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="AttendanceID" ColumnName="AttendanceID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AttendanceTypes">
+            <EntityTypeMapping TypeName="SARMSDBModel.AttendanceType">
+              <MappingFragment StoreEntitySet="AttendanceType">
+                <ScalarProperty Name="AttendanceTypeActive" ColumnName="AttendanceTypeActive" />
+                <ScalarProperty Name="AttendanceTypeApproved" ColumnName="AttendanceTypeApproved" />
+                <ScalarProperty Name="AttendanceTypeName" ColumnName="AttendanceTypeName" />
+                <ScalarProperty Name="AttendanceTypeID" ColumnName="AttendanceTypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LectureClasses">
+            <EntityTypeMapping TypeName="SARMSDBModel.LectureClass">
+              <MappingFragment StoreEntitySet="Class">
+                <ScalarProperty Name="UnitID" ColumnName="UnitID" />
+                <ScalarProperty Name="L7" ColumnName="L7" />
+                <ScalarProperty Name="L6" ColumnName="L6" />
+                <ScalarProperty Name="L5" ColumnName="L5" />
+                <ScalarProperty Name="L4" ColumnName="L4" />
+                <ScalarProperty Name="L3" ColumnName="L3" />
+                <ScalarProperty Name="L2" ColumnName="L2" />
+                <ScalarProperty Name="L1" ColumnName="L1" />
+                <ScalarProperty Name="W7" ColumnName="W7" />
+                <ScalarProperty Name="W6" ColumnName="W6" />
+                <ScalarProperty Name="W5" ColumnName="W5" />
+                <ScalarProperty Name="W4" ColumnName="W4" />
+                <ScalarProperty Name="W3" ColumnName="W3" />
+                <ScalarProperty Name="W2" ColumnName="W2" />
+                <ScalarProperty Name="W1" ColumnName="W1" />
+                <ScalarProperty Name="ClassID" ColumnName="ClassID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Lecturers">
+            <EntityTypeMapping TypeName="SARMSDBModel.Lecturer">
+              <MappingFragment StoreEntitySet="Lecturer">
+                <ScalarProperty Name="Lec12" ColumnName="Lec12" />
+                <ScalarProperty Name="Lec11" ColumnName="Lec11" />
+                <ScalarProperty Name="Lec10" ColumnName="Lec10" />
+                <ScalarProperty Name="Lec9" ColumnName="Lec9" />
+                <ScalarProperty Name="Lec8" ColumnName="Lec8" />
+                <ScalarProperty Name="Lec7" ColumnName="Lec7" />
+                <ScalarProperty Name="Lec6" ColumnName="Lec6" />
+                <ScalarProperty Name="Lec5" ColumnName="Lec5" />
+                <ScalarProperty Name="Lec4" ColumnName="Lec4" />
+                <ScalarProperty Name="Lec3" ColumnName="Lec3" />
+                <ScalarProperty Name="Lec2" ColumnName="Lec2" />
+                <ScalarProperty Name="Lec1" ColumnName="Lec1" />
+                <ScalarProperty Name="Lname" ColumnName="Lname" />
+                <ScalarProperty Name="Fname" ColumnName="Fname" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="Pword" ColumnName="Pword" />
+                <ScalarProperty Name="UID" ColumnName="UID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Students">
+            <EntityTypeMapping TypeName="SARMSDBModel.Student">
+              <MappingFragment StoreEntitySet="Student">
+                <ScalarProperty Name="Lec6" ColumnName="Lec6" />
+                <ScalarProperty Name="Lec5" ColumnName="Lec5" />
+                <ScalarProperty Name="Lec4" ColumnName="Lec4" />
+                <ScalarProperty Name="Lec3" ColumnName="Lec3" />
+                <ScalarProperty Name="Lec2" ColumnName="Lec2" />
+                <ScalarProperty Name="Lec1" ColumnName="Lec1" />
+                <ScalarProperty Name="Lname" ColumnName="Lname" />
+                <ScalarProperty Name="Fname" ColumnName="Fname" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="Pword" ColumnName="Pword" />
+                <ScalarProperty Name="UID" ColumnName="UID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Units">
+            <EntityTypeMapping TypeName="SARMSDBModel.Unit">
+              <MappingFragment StoreEntitySet="Unit">
+                <ScalarProperty Name="UnitName" ColumnName="UnitName" />
+                <ScalarProperty Name="UnitCode" ColumnName="UnitCode" />
+                <ScalarProperty Name="UnitID" ColumnName="UnitID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SESHes">
+            <EntityTypeMapping TypeName="SARMSDBModel.SESH">
+              <MappingFragment StoreEntitySet="SESH">
+                <ScalarProperty Name="TimeSt" ColumnName="TimeSt" />
+                <ScalarProperty Name="UID" ColumnName="UID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Lectures">
+            <EntityTypeMapping TypeName="SARMSDBModel.Lecture">
+              <MappingFragment StoreEntitySet="Lecture">
+                <ScalarProperty Name="UnitCode" ColumnName="UnitCode" />
+                <ScalarProperty Name="Classroom" ColumnName="Classroom" />
+                <ScalarProperty Name="Length" ColumnName="Length" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="Day" ColumnName="Day" />
+                <ScalarProperty Name="LectureId" ColumnName="LectureId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Alerts">
+            <EntityTypeMapping TypeName="SARMSDBModel.Alert">
+              <MappingFragment StoreEntitySet="Alert">
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+                <ScalarProperty Name="LecturerID" ColumnName="LecturerID" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="UnitID" ColumnName="UnitID" />
+                <ScalarProperty Name="AlertID" ColumnName="AlertID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Messages">
+            <EntityTypeMapping TypeName="SARMSDBModel.Message">
+              <MappingFragment StoreEntitySet="Message">
+                <ScalarProperty Name="MessageBody" ColumnName="MessageBody" />
+                <ScalarProperty Name="LecturerSender" ColumnName="LecturerSender" />
+                <ScalarProperty Name="StudentSender" ColumnName="StudentSender" />
+                <ScalarProperty Name="DateTime" ColumnName="DateTime" />
+                <ScalarProperty Name="AlertID" ColumnName="AlertID" />
+                <ScalarProperty Name="MessageID" ColumnName="MessageID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="SARMSDBModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
